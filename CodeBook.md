@@ -23,9 +23,8 @@ mean_stdev = table that contains only measurements of mean and standard dev of e
 activity_names = contents of the table activity_labels.txt
 column names for this data frame are changes to "Activity" and "Name"
 
-Total1 = this data frame contains an additional column where activity numbers are replaced by activity names. Total columns on this data frame are 564
 
-Tidyset = this data frame has data in Total1 grouped by Activity and Subject
+Tidyset = this data frame has data in total grouped by Activity and Subject
 
 
 ——————————Stepwise description———————————
@@ -44,13 +43,10 @@ Tidyset = this data frame has data in Total1 grouped by Activity and Subject
 
 - the column names for this dataframe are defined as "Activity" and "Name" respectively.
 
-- A new dataframe is created named "Total1". This df has an additional column "Name" where activity numbers are replaced by activity names using merge() function.
+- column values under total$Activity are updated as per the index in activity_labels dataframe.
 
 4. Using the sub() function, the variable names were changed. "^t" was replaced by "time_" and "^f" was replaced by "frequency_".
 
 5.Installed the package called dplyr for this problem.
 - new df was called "tidyset" where the data in df "total" was grouped by "Activity" and "Subject"
 - finally, the output was achieved by calculating average for each variable in df "tidyset". the function summarise_each() was used to perform this operation.
-
-
-  

@@ -32,9 +32,6 @@ total$Activity[total$Activity==4]<- "SITTING"
 total$Activity[total$Activity==5]<- "STANDING"
 total$Activity[total$Activity==6]<- "LAYING"
 
-colnames(activity_names)<-c("Activity","Name") #Renaming the name of column of df activity_name as "Activity" so it maches the same column in df = total.
-Total1<-merge(total,activity_names, by=c("Activity"))#Creating a new DF total1, with the merged col. Total 1 has 564 cols.
-
 #4----------------
 
 names(total)<-sub("^t","time_",names(total)) #replaces t in the beginning with time_
