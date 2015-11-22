@@ -1,6 +1,3 @@
-getwd()
-setwd("/Users/Manasvi/Downloads/UCI HAR Dataset")
-getwd()
 x_test = read.table("X_test.txt")
 x_train = read.table("X_train.txt")
 x_test_train<-rbind(x_test,x_train) #561 columns wide
@@ -28,22 +25,25 @@ mean_stdev<-total[,grep("mean\\(\\)|std\\(\\)", colnames(total))]
 #3---------------------------
 activity_names<-read.table("activity_labels.txt")
 
+total$Activity[total$Activity==1]<- "WALKING"
+total$Activity[total$Activity==2]<- "WALKING_UPSTAIRS"
+total$Activity[total$Activity==3]<- "WALKING_DOWNSTAIRS"
+total$Activity[total$Activity==4]<- "SITTING"
+total$Activity[total$Activity==5]<- "STANDING"
+total$Activity[total$Activity==6]<- "LAYING"
+
 colnames(activity_names)<-c("Activity","Name") #Renaming the name of column of df activity_name as "Activity" so it maches the same column in df = total.
 Total1<-merge(total,activity_names, by=c("Activity"))#Creating a new DF total1, with the merged col. Total 1 has 564 cols.
 
-#4
+#4----------------
 
-#install.packages("plyr") #this function was not used eventually in this problem
-#library(plyr)
-#test<-rename(activity_names,c())
-
-names(Total1)<-sub("^t","time_",names(Total1)) #replaces t in the beginning with time_
-names(Total1)<-sub("^f","frequency_",names(Total1)) #replcaes f with frequency_
+names(total)<-sub("^t","time_",names(total)) #replaces t in the beginning with time_
+names(total)<-sub("^f","frequency_",names(total)) #replcaes f with frequency_
 
 #5 ------------------------------
 
 install.packages("dplyr")
 library(dplyr)
-tidyset<-group_by(Total,Activity,Subject)
+tidyset<-group_by(total,Activity,Subject)
 View(summarise_each(tidyset,funs(mean)))
 write.table(tidyset,"MyAssignment.txt",row.name = FALSE)
